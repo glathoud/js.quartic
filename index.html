@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><title>Position the ramp of a construction site by solving a quartic equation</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="author" content="Guillaume Lathoud"><meta name="description" content="Position the ramp of a construction site by solving a quartic equation"><meta name="keywords" content="math, quartic, construction"><style type="text/css">body { color: #333322; } .block {display: block;} .inline {display: inline;} @media only print { .topleft, .topleftfixed, .topleftmenu, .topright, .toprightfixed, .toprightmenu { display: none; } } .topleft { top:0px; left:0px; position:absolute;} .topright { top:0px; right:0px; position:absolute;} .topleftfixed { top:0px; left:0px; position:fixed;} .toprightfixed { top:0px; right:0px; position:fixed;} body { margin: auto; margin-top: 30px; width: 748px;  line-height: 150%; text-align: justify; font-family: Verdana,Arial,'Lucida Grande',Sans-Serif; } p { margin-top: 0pt; text-indent : 0.2in; } .math_div { text-decoration: line-through; } pre { text-indent: 0; color: brown; line-height: 150%; } code { text-indent: 0; font-size: 1.1em; } .fl { float: left; } .fr  { float: right; } .clear { clear: both; } .topleftmenu { background-color: white; opacity: 0.75; border-width: 0 1px 1px 0; border-color: black; border-style: solid; padding: 5px;} .toprightmenu { background-color: white; opacity: 0.75; border-width: 0 0 1px 1px; border-color: black; border-style: solid; padding: 5px;} a:link {color: #0066CC; text-decoration: none;} a:visited {color:#0066CC; text-decoration: none; } a:hover {color:#003366; text-decoration: underline;}  a:active {color:lightblue}  blockquote  {  border-left: 2px solid; padding-left: 16px; }  .section-title-note { font-size: 80%; font-weight: normal; } </style><style type="text/css">body { margin: auto; width: 600px; }
+@media only screen and (max-width: 1040px) { body { margin-left: 220px; } }
+#main { width: 100%; margin: auto; }
+@media only screen { .bib-view-single { display: none; } }
+
+#three-view { width: 100%; height: 400px; cursor: pointer; }
+
+.number-input, .number-output { width: 45px; }
+pre, body { color: #232; }
+</style><script type="text/javascript">var _gl_gat_event_link_clicked = function ( href ) { if ( ! window.pageTracker ) { return; } pageTracker._trackPageview( '/_events/click/' + href ); pageTracker._link( href ); return false;};</script><script type="text/javascript" src="../prettify/prettify.js"></script><link href="../prettify/prettify.css" type="text/css" rel="stylesheet">
+<!--
+
+
+  This HTML page contains the mathematical description of a problem
+  and its solution, an interactive numerical demo and 3D demo, and 
+  links to the programs I wrote to implement the solution.
+
+
+  Copyright 2013 Guillaume Lathoud
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+  http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  A copy of the Apache License Version 2.0 as of February 20th, 2013
+  can be found in the file ./LICENSE.TXT
+
+-->
+</head><body class=""><div class="topleftfixed topleftmenu"><div><a href="#main" onclick="_gl_gat_event_link_clicked(this.href);">Top</a></div><div><a href="#details" onclick="_gl_gat_event_link_clicked(this.href);">Details</a></div><div><a href="#horizproblem" onclick="_gl_gat_event_link_clicked(this.href);">Geometry</a></div><div><a href="#equation" onclick="_gl_gat_event_link_clicked(this.href);">Equation</a></div><div><a href="#solution" onclick="_gl_gat_event_link_clicked(this.href);">Solution</a></div><div><a href="#files" onclick="_gl_gat_event_link_clicked(this.href);">Files</a></div><div>&nbsp;</div><div><a href="/" onclick="_gl_gat_event_link_clicked(this.href);">&rArr; Back home</a></div><div><a href="/email.jpg" onclick="_gl_gat_event_link_clicked(this.href);">&rArr; email</a></div></div><div id="main"><h2>Position the ramp of a construction site by solving a quartic equation</h2><h3 class="fr">by Guillaume Lathoud, February 2013</h3><div class="clear"></div><div id="three-view"></div><h2 id="problem">Problem</h2><form name="problem-input"><p>Determine the position of the blue ramp with:<blockquote>width&nbsp;<input type="number" class="number-input" name="blue-width" value="3.5" min="0" max="10000." step=".1"></input>&nbsp;meters and slope&nbsp;<input type="number" class="number-input" name="blue-slope" value="25" min="1" max="100000."></input>&nbsp;%</blockquote>when the red slopes have:<blockquote>depth <input type="number" class="number-input" name="red-depth" value="3.5" min="0" max="10000." step=".1"></input>&nbsp;meters and slope <input type="number" class="number-input" name="red-slope" value="60" min="1" max="89"></input>&nbsp;degrees.</blockquote></p></form><h2 id="result">Result</h2><form name="result"><p>The blue ramp has:<blockquote>length <input type="text" readonly="readonly" class="number-output" name="blue-length"></input> meters and angle <input type="text" readonly="readonly" class="number-output" name="blue-angle"></input> degrees.</blockquote> and the small side of the green triangle has:<blockquote>length <input type="text" readonly="readonly" class="number-output" name="green-small-side-length"></input> meters.</blockquote></p></form><h2 id="details">Details</h2><p>Below, the <a href="#problem">problem</a> is described geometrically in the
+<a href="#horizproblem">horizontal plane</a>, turned into a 4th power polynomial <a href="#equation">equation</a>, of which a
+direct, <a href="#solution">general solution</a> is known since the
+Renaissance works of Ferrari (and Vieta).</p><p><a href="#files">Files</a> are then shortly described, which implement this general solution.</p><h3 id="problem-details">Problem</h3><p>The goal is to determine the position of blue ramp going down from the top of the red slopes to their bottom (all three are rectangles). </p><p>Both steep red slopes have the same  \( depth\) and \(slope_{red}\), thus the same projected «horizontal width»: \[
+ qq_{red}~\buildrel\triangle\over =~ \frac{depth}{slope_{red}}
+\] where for example \(slope_{red} = tan(\pi\frac{60}{180})\) (60-degree red slopes).</p><p>The blue ramp has a given \(width_{blue}\) and a given \( slope_{blue}\), and thus a projected «horizontal length»: \[ 
+horizlength_{blue}~\buildrel\triangle\over =~\frac{depth}{slope_{blue}}
+\] where \(slope_{blue} < slope_{red} \), for example \(slope_{blue} = 0.25 ~~(25\%)\).</p><h3 id="horizproblem">Problem, projected onto the horizontal plane</h3><div><img src="horiz.jpg"></div><h4>Constraints</h4><p>The green triangle is horizontal. The leftmost corner of the blue ramp \(i \cdot zz\) must be at the top of the red slope.</p><p>The origin \(O\), the nearby corner of the blue ramp \( yy \cdot exp(i \cdot angle) \), and the rightmost corner of the blue ramp \( xx + i \cdot qq \) must be colinear. The latter must also be at the bottom of the red slope.</p><p>The problem is fully determined 
+by \(qq\), \(horizlength\) and \(width\). To&nbsp;find the position of the blue ramp, we need to determine \(xx\), \(yy\), \(zz\) and \(angle\).</p><h3 id="equation">Equation</h3><p>Since the ramp is rectangular, \( angle \) appears at several locations. Expressing for example \(tan(angle)\), one can show that: \[ qq \cdot width=xx \cdot yy \]
+      Squaring both sides and using the Pythagorean theorem to express \(xx^2\), one obtains:
+ 
+      \[ f(yy)=0 \]
+
+      where: \[ f(yy)~\buildrel\triangle\over =~yy^2 \cdot ((horizlength+yy)^2-qq^2)-qq^2 \cdot width^2 \]
+
+which is a 4th power polynomial in \( yy \). The other variables \(xx\), \(zz\) and \(angle\) 
+can all be derived from \( yy \).
+</p><h3 id="solution">Direct solution</h3><p>Fortunately, the 4th power is the highest degree that can be 
+algebraically solved&nbsp;<a href="#ref_1_quartic-history" onclick="_gl_gat_event_link_clicked(this.href);">[1]</a><a href="#ref_2_quartic-maximum" onclick="_gl_gat_event_link_clicked(this.href);">[2]</a> using a direct, general solution, which I decided 
+to implement, so as to have reusable code. I chose Ferrari's solution&nbsp;<a href="#ref_3_quartic-wikipedia" onclick="_gl_gat_event_link_clicked(this.href);">[3]</a>, including Vieta's substitution in the depressed cubic case&nbsp;<a href="#ref_4_cubic-depressed-vieta" onclick="_gl_gat_event_link_clicked(this.href);">[4]</a>.</p><h3 id="files">Files</h3><p>Code I wrote to solve the problem:</p><ul><li><a href="log.js">log.js</a> and <a href="complex.js">complex.js</a>: Base code.</li><li><a href="solve_quartic.js">solve_quartic.js</a>: <strong>General solution of the quartic equation.</strong></li><li><a href="solve_problem.js">solve_problem.js</a>: Application to the specific ramp problem.</li><li><a href="./LICENSE.TXT">LICENSE.TXT</a>: Apache 2.0 License.</li></ul><p>Third-party software, used to render this article:</p><ul><li><a href="three.js">three.js</a> and <a href="three.min.js">three.min.js</a>: 3D rendering engine.</li><li><a href="trackballcontrols.js">trackballcontrols.js</a>: Extension to rotate the 3D model.</li><li><a href="../MathJax/MathJax.js">MathJax.js</a>: Mathematical formula rendering engine.</li></ul><h3 id="ack">Acknowledgments</h3><p>Thanks to Felix Schädler for the initial request, and to the authors of <a href="https://github.com/mrdoob/three.js/" onclick="_gl_gat_event_link_clicked(this.href);">three.js</a> and <a href="http://www.mathjax.org/" onclick="_gl_gat_event_link_clicked(this.href);">MathJax</a> for their excellent softwares.</p><h3 id="ref">References</h3><p id="ref_1_quartic-history" class="bib-view-list">[1] <a href="http://en.wikipedia.org/wiki/Quartic_function#History" onclick="_gl_gat_event_link_clicked(this.href);">http://en.wikipedia.org/wiki/Quartic_function#History</a></p><p id="ref_2_quartic-maximum" class="bib-view-list">[2] <a href="http://en.wikipedia.org/wiki/Abel%E2%80%93Ruffini_theorem" onclick="_gl_gat_event_link_clicked(this.href);">http://en.wikipedia.org/wiki/Abel%E2%80%93Ruffini_theorem</a></p><p id="ref_3_quartic-wikipedia" class="bib-view-list">[3] <a href="http://en.wikipedia.org/wiki/Quartic_function" onclick="_gl_gat_event_link_clicked(this.href);">http://en.wikipedia.org/wiki/Quartic_function</a></p><p id="ref_4_cubic-depressed-vieta" class="bib-view-list">[4] <a href="http://en.wikipedia.org/wiki/Cubic_equation#Vieta.27s_substitution" onclick="_gl_gat_event_link_clicked(this.href);">http://en.wikipedia.org/wiki/Cubic_equation#Vieta.27s_substitution</a></p><h3 id="license">License</h3><pre>
+  This HTML page contains the mathematical description of a problem
+  and its solution, an interactive numerical demo and 3D demo, and 
+  links to the programs I wrote to implement the solution.
+
+
+  Copyright 2013 Guillaume Lathoud
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+  http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  A copy of the Apache License Version 2.0 as of February 20th, 2013
+  can be found in the file ./LICENSE.TXT
+</pre><p>File <a href="LICENSE.TXT">./LICENSE.TXT</a></p></div><hr class="produced-hr"><p class="produced"><span style="float:left">Produced on 2013-02-20 by <a href="index.scm" onclick="_gl_gat_event_link_clicked(this.href);">index.scm</a> - by <a href="/" onclick="_gl_gat_event_link_clicked(this.href);">Guillaume Lathoud</a> (glathoud _at_ yahoo _dot_ fr)</span><span class="w3validator"><a href="http://validator.w3.org/check?uri=referer" onclick="_gl_gat_event_link_clicked(this.href);"><img src="/valid-html401.png" alt="Valid HTML 4.01 Strict" style="float:right; height:31px; width:88px;"></a></span></p><script type="text/javascript">setTimeout( prettyPrint );</script><script type="text/javascript" src="three.min.js"></script><script type="text/javascript" src="../MathJax/MathJax.js?config=default"></script><script type="text/javascript" src="index.js"></script><script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-5516483-1']);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script');    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :         'http://www') + '.google-analytics.com/ga.js';    ga.setAttribute('async', 'true');    document.documentElement.firstChild.appendChild(ga);  })();</script></body></html>
