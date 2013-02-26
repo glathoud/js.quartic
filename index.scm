@@ -28,6 +28,8 @@
 
 (include "../my_web.scm")
 
+(define my_github "https://github.com/glathoud/js.quartic")
+
 (define my_output_filename "index.html")
 
 (define my_output_js_filename "index.js")
@@ -134,6 +136,18 @@
 
 (define my_bodylist
   `( 
+
+    
+    ;; From https://github.com/blog/273-github-ribbons
+    ( (a (href ,my_github)) 
+      ( (img (style "position: fixed; top: 0; right: 0; border: 0; margin: 0; padding: 0;")
+             (src "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png")
+             (alt "Fork me on GitHub")
+             )
+        )
+      )
+
+    ;;
 
       ((div (class "topleftfixed topleftmenu"))
 
